@@ -12,9 +12,11 @@ document.getParameters = () => location.search.slice(1).split('&').map(currentVa
   return accumulator;
 }, {});
 const {param = ''} = document.getParameters();
+console.log('param=', param);
 if (param !== '') {
   const onCopy = function (event) {
     event.clipboardData.setData('text/html', `<a href='https://teams.microsoft.com/_#/search?q=#${param}'>#${param}</a>`);
+    event.clipboardData.setData('text/plain', `#${param}`);
     event.preventDefault();
     document.removeEventListener('copy', onCopy);
   };
