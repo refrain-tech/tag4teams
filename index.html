@@ -8,10 +8,10 @@
     <button id = 'copyButton'>コピー</button>
     <script>
 function onCopy (event) {
-  const tags = keywords.value.replace(/　/g, ' ').split(' ').map(keyword => keyword.startsWith('#') ? keyword : `#${keyword}`).join(' ');
-  const html = tags.map(tag => `<a href = 'https://teams.microsoft.com/_#/apps/search?q=${encodeURIComponent(tag)}'${tag}</a>`).join(' ');
-  event.clipboardData.setData('text/html', html);
-  event.clipboardData.setData('text/plain', tags);
+  const tags = keywords.value.replace(/　/g, ' ').split(' ').map(keyword => keyword.startsWith('#') ? keyword : `#${keyword}`);
+  const html = tags.map(tag => `<a href = 'https://teams.microsoft.com/_#/apps/search?q=${encodeURIComponent(tag)}'${tag}</a>`);
+  event.clipboardData.setData('text/html', html.join(' '));
+  event.clipboardData.setData('text/plain', tags.join(' '));
   event.preventDefault();
   document.removeEventListener('copy', onCopy, false);
 }
