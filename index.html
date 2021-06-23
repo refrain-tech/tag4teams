@@ -9,7 +9,8 @@
     <script>
 function onCopy (event) {
   const tags = keywords.value.replace(/　/g, ' ').split(' ').map(keyword => keyword.startsWith('#') ? keyword : `#${keyword}`);
-  const html = tags.map(tag => `<a href = 'https://teams.microsoft.com/_#/apps/search?q=${encodeURIComponent(tag)}'>${tag}</a>`).reduce((accumulator, element) => accumulator + element);
+  const html = tags.map(tag => `<a href = 'https://teams.microsoft.com/_#/apps/search?q=${encodeURIComponent(tag)}'>${tag}</a>`)
+      .reduce((accumulator, element) => `${accumulator}<br />${element}`);
   event.clipboardData.setData('text/html', html);
   event.clipboardData.setData('text/plain', tags.join(' '));
   event.preventDefault();
