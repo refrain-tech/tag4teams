@@ -11,18 +11,20 @@ document.getParameters = () => location.search.slice(1).split('&').map(currentVa
   accumulator[key] = value || key;
   return accumulator;
 }, {});
-const {param = ''} = document.getParameters();
-console.log('param=', param);
-if (param !== '') {
-  const onCopy = function (event) {
-    event.clipboardData.setData('text/html', `<a href='https://teams.microsoft.com/_#/search?q=#${param}'>#${param}</a>`);
-    event.clipboardData.setData('text/plain', `#${param}`);
-    event.preventDefault();
-    document.removeEventListener('copy', onCopy);
-  };
-  document.addEventListener('copy', onCopy, false);
-  document.execCommand('copy');
-}
+document.addEventListener('DOMContentLoaded', function (event) {
+  const {param = ''} = document.getParameters();
+  console.log('param=', param);
+  if (param !== '') {
+    const onCopy = function (event) {
+      event.clipboardData.setData('text/html', `<a href='https://teams.microsoft.com/_#/search?q=#${param}'>#${param}</a>`);
+      event.clipboardData.setData('text/plain', `#${param}`);
+      event.preventDefault();
+      document.removeEventListener('copy', onCopy);
+    };
+    document.addEventListener('copy', onCopy, false);
+    document.execCommand('copy');
+  }
+}, false);
     </script>
   </body>
 </html>
