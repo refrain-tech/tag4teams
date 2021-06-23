@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset = 'utf-8' />
+    <title>Tag 4 Teams</title>
+  </head>
+  <body>
+    <script>
+document.getParameters = () => location.search.slice(1).split('&').map(currentValue => currentValue.split('=')).reduce((accumulator, currentValue) => {
+  const [key, value] = currentValue;
+  accumulator[key] = value || key;
+  return accumulator;
+}, {});
+const {param = ''} = document.getParameters();
+if (param !== '') {
+  const onCopy = function (event) {
+    event.clipboardData.setData('text/html', `<a href='https://teams.microsoft.com/_#/search?q=#${param}'>#${param}</a>`);
+    event.preventDefault();
+    document.removeEventListener('copy', onCopy);
+  };
+  document.addEventListener('copy', onCopy, false);
+  document.execCommand('copy');
+}
+    </script>
+  </body>
+</html>
